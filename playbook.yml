@@ -1,0 +1,22 @@
+---
+
+- hosts: all
+  roles:
+    - yaourt
+  pre_tasks:
+    - name: "Update package cache"
+      become: true
+      pacman:
+        update_cache: true
+  tasks:
+    - name: "Install basic packages"
+      become: true
+      pacman:
+        name: "{{ item }}"
+      with_items:
+        - git
+        - gvim
+        - htop
+        - ntp
+        - wget
+        - curl
