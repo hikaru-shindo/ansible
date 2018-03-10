@@ -12,3 +12,50 @@
     - expac
     - yajl
     - gpgme
+    - git
+
+- name: Check cower installed
+  command: pacman -Q cower
+  failed_when: false
+  changed_when: cower.rc != -0
+  register: cower
+
+- name: Get cower GPG key
+  shell: gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53
+  when: cower.rc != 0
+
+- name: Create cower build directory
+  file:
+    dest: /tmp/cower
+    state: directory
+  when: cower.rc != 0
+
+- name: Download cower
+  get_url:
+    url: https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower
+    dest: /tmp/cower/PKGBUILD
+  when: cower.rc != 0
+
+- name: Install cower
+  shell: makepkg -i PKGBUILD --noconfirm
+  args:
+    chdir: /tmp/cower
+  when: cower.rc != 0
+  notify: Cleanup cower build directory
+
+- name: Check pacaur installed
+  command: pacman -Q pacaur
+  failed_when: false
+  changed_when: pacaur.rc != 0
+  register: pacaur
+
+- name: Download pacaur
+  shell: cower -dqf --target=/tmp/ pacaur
+  when: pacaur.rc != 0
+
+- name: Install pacaur
+  command: "makepkg PKGBUILD --install --needed --noconfirm"
+  args:
+    chdir: /tmp/pacaur/
+  notify: Cleanup pacaur build directory
+  when: pacaur.rc != 0
