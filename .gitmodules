@@ -1,0 +1,3 @@
+[submodule "external/pacaur"]
+	path = external/pacaur
+	url = git@github.com:sanderboom/ansible-pacaur.git

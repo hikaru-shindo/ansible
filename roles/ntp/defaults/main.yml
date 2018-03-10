@@ -1,0 +1,10 @@
+---
+# defaults file for ntp
+
+ntp_timeservers:
+  - host: ptbtime1.ptb.de
+    options: iburst
+  - host: ptbtime2.ptb.de
+    options: iburst
+  - host: ptbtime3.ptb.de
+    options: iburst

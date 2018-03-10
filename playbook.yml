@@ -2,7 +2,8 @@
 
 - hosts: all
   roles:
-    - yaourt
+    - pacaur
+    - ntp
   pre_tasks:
     - name: "Update package cache"
       become: true
@@ -20,3 +21,24 @@
         - ntp
         - wget
         - curl
+        - numlockx
+    - name: Install IDEs
+      become: true
+      pacaur:
+        name: "{{ item }}"
+      with_items:
+        - phpstorm
+        - rubymine
+        - goland
+        - pycharm-professional
+        - visual-studio-code-bin
+        - android-studio
+    - name: Install browsers
+      become: true
+      pacaur:
+        name: "{{ item }}"
+      with_items:
+        - google-chrome
+        - firefox
+        - firefox-i18n-de
+        - opera

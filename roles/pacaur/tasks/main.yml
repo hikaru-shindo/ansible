@@ -1,0 +1,14 @@
+---
+# tasks file for pacaur
+
+- name: Ensure build dependencies
+  become: true
+  pacman:
+    name: "{{ item }}"
+  with_items:
+    - base-devel
+    - curl
+    - jshon
+    - expac
+    - yajl
+    - gpgme

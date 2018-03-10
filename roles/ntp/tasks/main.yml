@@ -1,0 +1,25 @@
+---
+# tasks file for ntp
+
+- name: Ensure ntp packages
+  become: true
+  package:
+    name: "{{ item }}"
+  with_items:
+    - ntp
+
+- name: Ensure ntpd service is enabled and started
+  become: true
+  service:
+    name: ntpd
+    enabled: yes
+    state: started
+
+- name: Ensure timeservers
+  become: true
+  lineinfile:
+    dest: /etc/ntp.conf
+    line: "pool {{ item.host }} {{ item.options }}"
+    regexp: "{{ item.host }}"
+  with_items: "{{ ntp_timeservers }}"
+  notify: restart ntpd
