@@ -7,6 +7,7 @@
   pre_tasks:
     - name: "Update package cache"
       become: true
+      changed_when: false
       pacman:
         update_cache: true
   tasks:
