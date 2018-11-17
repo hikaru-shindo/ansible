@@ -2,8 +2,9 @@
 
 - hosts: all
   roles:
-    - pacaur
+    - yay
     - ntp
+    - docker
   pre_tasks:
     - name: "Update package cache"
       become: true
@@ -14,32 +15,30 @@
     - name: "Install basic packages"
       become: true
       pacman:
-        name: "{{ item }}"
-      with_items:
-        - git
-        - gvim
-        - htop
-        - ntp
-        - wget
-        - curl
-        - numlockx
+        name:
+          - git
+          - gvim
+          - htop
+          - ntp
+          - wget
+          - curl
+          - numlockx
     - name: Install IDEs
       become: true
-      pacaur:
-        name: "{{ item }}"
-      with_items:
-        - phpstorm
-        - rubymine
-        - goland
-        - pycharm-professional
-        - visual-studio-code-bin
-        - android-studio
+      yay:
+        name:
+          - phpstorm
+          - rubymine
+          - goland
+          - pycharm-professional
+          - visual-studio-code-bin
+          - android-studio
     - name: Install browsers
       become: true
-      pacaur:
-        name: "{{ item }}"
-      with_items:
-        - google-chrome
-        - firefox
-        - firefox-i18n-de
-        - opera
+      yay:
+        name:
+          - google-chrome
+          - chromium
+          - firefox
+          - firefox-i18n-de
+          - opera

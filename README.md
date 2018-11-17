@@ -1,12 +1,16 @@
 # Ansible Playoook for provisioning notebook
 
+This is my ansible playbook to setup new notebooks for my needs. It is build using ansible >= 2.7!
+
 ## Preparation
 
 As root:
 ```sh
 $ pacman -S ansible sudo
-$ usermod -aG sudo <your user>
+$ usermod -aG wheel <your user>
 ```
+
+Now activate `wheel` group in `/etc/sudoers` to execute root commands with or without password to your liking.
 
 ## Usage
 

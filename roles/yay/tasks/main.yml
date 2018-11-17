@@ -1,0 +1,40 @@
+---
+# tasks file for pacaur
+
+- name: Ensure build dependencies
+  become: true
+  pacman:
+    name:
+      - base-devel
+      - curl
+      - jshon
+      - expac
+      - yajl
+      - gpgme
+      - git
+
+- name: Check yay installed
+  command: pacman -Q yay
+  failed_when: false
+  changed_when: yay.rc != -0
+  register: yay
+
+- name: Create yay build directory
+  file:
+    dest: /tmp/yay
+    state: directory
+  when: yay.rc != 0
+
+- name: Download yay
+  get_url:
+    url: https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=yay
+    dest: /tmp/yay/PKGBUILD
+  when: yay.rc != 0
+
+- name: Install yay
+  shell: makepkg -i PKGBUILD --noconfirm
+  args:
+    chdir: /tmp/yay
+  when: yay.rc != 0
+  notify: Cleanup yay build directory
+

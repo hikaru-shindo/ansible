@@ -1,0 +1,7 @@
+---
+
+- name: Cleanup yay build directory
+  file:
+    dest: /tmp/yay
+    state: absent
+
