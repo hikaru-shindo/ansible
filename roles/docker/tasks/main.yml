@@ -12,8 +12,9 @@
   package:
     name: docker-compose
     state: present
+  notify: restart docker
 
-- name: Add current user to docker group
+- name: "Add current user to docker group"
   become: true
   user:
     name: "{{ ansible_user }}"

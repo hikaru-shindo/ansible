@@ -1,0 +1,10 @@
+---
+
+php_packages:
+  - php
+  - php-apcu
+  - php-intl
+  - php-gd
+  - php-geoip
+  - php-sodium
+  - php-xsl

@@ -1,0 +1,24 @@
+---
+
+- name: Install bluez
+  become: true
+  package:
+    name:
+      - bluez
+      - bluez-utils
+    state: present
+  notify: restart bluetooth
+
+- name: "Add current user to lp group"
+  become: true
+  user:
+    name: "{{ ansible_user }}"
+    groups: lp
+    append: true
+
+- name: Install bluetooth control tools
+  become: true
+  package:
+    name:
+      - blueman
+      - blueberry 

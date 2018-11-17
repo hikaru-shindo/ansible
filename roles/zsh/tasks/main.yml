@@ -1,0 +1,63 @@
+---
+
+- name: Ensure zsh installed
+  become: true
+  package:
+    name: zsh
+    state: present
+
+- name: Ensure git installed
+  become: true
+  package:
+    name: git
+    state: present
+
+- name: Ensure OhMyZSH installed
+  git:
+    repo: git://github.com/robbyrussell/oh-my-zsh.git
+    dest: "{{ zsh_home }}/.oh-my-zsh"
+    version: "{{ zsh_oh_my_zsh_version }}"
+
+- name: Ensure custom directories
+  file:
+    path: "{{ zsh_home }}/.oh-my-zsh/{{ item }}"
+    state: directory
+    mode: "0755"
+  with_items:
+    - custom/themes
+    - custom/plugins
+
+- name: Copy custom themes
+  copy:
+    src: "{{ item.path }}"
+    dest: "{{ zsh_home }}/.oh-my-zsh/custom/themes/{{ item.name }}.zsh-theme"
+  with_items: "{{ zsh_oh_my_zsh_themes }}"
+
+- name: Activate zsh for user
+  become: true
+  user:
+    shell: "{{ zsh_path }}"
+    name: "{{ zsh_user }}"
+
+- name: Enable oh-my-zsh for user
+  command: "cp {{ zsh_home }}/.oh-my-zsh/templates/zshrc.zsh-template {{zsh_home }}/.zshrc"
+  args:
+    creates: "{{ zsh_home }}/.zshrc"
+
+- name: Ensure oh-my-zsh path in .zshrc
+  lineinfile:
+    dest: "{{ zsh_home }}/.zshrc"
+    line: "export ZSH={{ zsh_home }}/.oh-my-zsh"
+    regexp: "^export ZSH="
+
+- name: Ensure oh-my-zsh-theme in .zshrc
+  lineinfile:
+    dest: "{{ zsh_home }}/.zshrc"
+    line: "ZSH_THEME=\"{{ zsh_theme }}\""
+    regexp: "^ZSH_THEME"
+
+- name: Ensure powerline fonts
+  become: true
+  package:
+    name: powerline-fonts
+    state: present

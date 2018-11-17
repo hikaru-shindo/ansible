@@ -1,0 +1,20 @@
+---
+
+- name: Setup Lenovo T480 specifics
+  hosts: all
+  tasks:
+    - name: Install intel graphics drivers
+      become: true
+      package:
+        name: xf86-video-intel
+    - name: Install throttling fix
+      become: true
+      yay:
+        name: lenovo-throttling-fix-git
+    - name: Enable throttling fix service
+      become: true
+      shell: systemctl enable --now lenovo_fix.service
+    - name: Ensure throttling fix started
+      service:
+        name: lenovo_fix
+        state: started

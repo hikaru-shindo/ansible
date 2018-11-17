@@ -1,0 +1,25 @@
+---
+
+- name: Install pulseaudio
+  become: true
+  package:
+    name:
+      - pulseaudio
+      - pulseaudio-alsa
+      - pulseaudio-bluetooth
+      - pulseaudio-zeroconf
+    state: present
+
+- name: "Add current user to audio group"
+  become: true
+  user:
+    name: "{{ ansible_user }}"
+    groups: "audio"
+    append: true
+
+- name: Install pavucontrol
+  become: true
+  package:
+    name: pavucontrol
+    state: present
+ 

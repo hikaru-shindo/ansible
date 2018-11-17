@@ -1,0 +1,9 @@
+---
+
+- name: Enable YubiKey SmartCard support
+  become: true
+  copy:
+    content: ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0407", MODE="664", GROUP="users"
+    dest: /etc/udev/rules.d/70-yubikey.rules
+  notify: reload udev rules
+

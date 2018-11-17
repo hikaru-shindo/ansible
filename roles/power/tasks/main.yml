@@ -1,0 +1,7 @@
+---
+
+- name: Install power manager
+  become: true
+  package:
+    name: xfce4-power-manager
+    state: present

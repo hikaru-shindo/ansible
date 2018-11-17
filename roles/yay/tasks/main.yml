@@ -7,10 +7,6 @@
     name:
       - base-devel
       - curl
-      - jshon
-      - expac
-      - yajl
-      - gpgme
       - git
 
 - name: Check yay installed

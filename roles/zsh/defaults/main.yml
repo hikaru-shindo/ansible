@@ -1,0 +1,10 @@
+---
+
+zsh_oh_my_zsh_version: master
+zsh_oh_my_zsh_themes:
+  - path: files/zeta.zsh-theme
+    name: zeta
+zsh_theme: zeta
+zsh_path: /usr/bin/zsh
+zsh_user: "{{ ansible_user }}"
+zsh_home: "{{ ansible_user_dir }}"

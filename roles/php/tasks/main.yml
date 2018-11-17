@@ -1,0 +1,13 @@
+---
+
+- name: Install PHP packages
+  become: true
+  package:
+    name: "{{ php_packages }}"
+    state: present
+    
+- name: Install composer
+  become: true
+  package:
+    name: composer
+    state: present

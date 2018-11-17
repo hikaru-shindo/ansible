@@ -1,0 +1,27 @@
+---
+
+- name: Install network manager
+  become: true
+  package:
+    name:
+      - networkmanager
+      - networkmanager-openvpn
+      - networkmanager-vpnc
+      - networkmanager-openconnect
+      - networkmanager-strongswan
+      - networkmanager-pptp
+    state: present
+
+- name: Install gnome-keyring
+  become: true
+  package:
+    name: gnome-keyring
+    state: present
+
+- name: Install network manager GUIs
+  become: true
+  package:
+    name: 
+      - networkmanager-qt
+      - network-manager-applet
+    state: present

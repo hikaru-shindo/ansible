@@ -1,0 +1,55 @@
+---
+
+- name: Install xorg-xserver
+  become: true
+  package:
+    name: 
+      - xorg-server
+      - xorg-xinit
+    state: present
+
+- name: Install additional xorg packages
+  become: true
+  package:
+    name:
+      - xorg-setxkbmap
+      - xorg-xrandr
+      - xorg-xbacklight
+    state: present
+
+- name: Install i3wm
+  become: true
+  package:
+    name:
+      - i3-gaps
+      - i3blocks
+      - i3lock
+      - i3status
+
+- name: Ensure dbus
+  become: true
+  package:
+    name: dbus
+    state: present
+
+- name: Install slock
+  become: true
+  package:
+    name: slock
+    state: present
+
+- name: Configure i3 with xinit
+  copy:
+    content: exec dbus-launch i3
+    dest: "{{ ansible_user_dir }}/.xinitrc"
+
+- name: Ensures i3 config dir exists
+  file:
+    path: "{{ ansible_user_dir }}/.config/i3" 
+    state: directory
+
+- name: Configure i3
+  copy:
+    src: "{{ i3_config_file }}"
+    dest: "{{ ansible_user_dir }}/.config/i3/config"
+
