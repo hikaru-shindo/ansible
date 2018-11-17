@@ -6,6 +6,12 @@
     zsh_user: "{{ ansible_user }}"
     zsh_home: "{{ ansible_user_dir }}"
     zsh_theme: "agnoster"
+    browsers:
+      - google-chrome
+      - firefox
+      - firefox-i18n-de
+      - opera
+      - chromium
   roles:
     - yay
     - network
@@ -84,10 +90,10 @@
           - gvfs-mtp
           - gvfs-google
           - gvfs-afc
-    - name: Install google-chrome
+    - name: Install web browsers
       become: true
       yay:
-        name: google-chrome
+        name: "{{ browsers }}"
 
 - name: Setup PHP development 
   hosts: all
@@ -108,16 +114,6 @@
           - phpstorm
           - visual-studio-code-bin
           - atom
-    - name: Install browsers
-      become: true
-      yay:
-        name:
-          - google-chrome
-          - chromium
-          - firefox
-          - firefox-i18n-de
-          - opera
-        state: present
     - name: Install development tools
       become: true
       yay:
