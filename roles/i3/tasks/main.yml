@@ -32,10 +32,12 @@
     name: dbus
     state: present
 
-- name: Install slock
+- name: Install lockers
   become: true
-  package:
-    name: slock
+  yay:
+    name:
+      - slock
+      - i3lock-fancy-multimonitor-git
     state: present
 
 - name: Configure i3 with xinit
@@ -52,4 +54,3 @@
   copy:
     src: "{{ i3_config_file }}"
     dest: "{{ ansible_user_dir }}/.config/i3/config"
-
