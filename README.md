@@ -4,13 +4,18 @@ This is my ansible playbook to setup new notebooks for my needs. It is build usi
 
 ## Preparation
 
-As root:
+First get the submodules by running:
+```sh
+$ git submodule update
+```
+
+Now run as root:
 ```sh
 $ pacman -S ansible sudo
 $ usermod -aG wheel <your user>
 ```
 
-Now activate `wheel` group in `/etc/sudoers` to execute root commands with or without password to your liking.
+Activate `wheel` group in `/etc/sudoers` to execute root commands with or without password to your liking and use this playbook.
 
 ## Usage
 
