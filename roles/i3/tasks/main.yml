@@ -25,6 +25,7 @@
       - i3blocks
       - i3lock
       - i3status
+      - dmenu
 
 - name: Ensure dbus
   become: true
