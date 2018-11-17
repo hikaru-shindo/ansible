@@ -15,6 +15,7 @@
     - audio
     - ntp
     - yubikey
+    - ssh
     - zsh
     - i3
   pre_tasks:
