@@ -1,5 +1,11 @@
 ---
 
+- name: Install ACPI tooling
+  become: true
+  package:
+    name: acpi
+    state: present
+
 - name: Install power manager
   become: true
   package:

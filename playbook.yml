@@ -11,7 +11,6 @@
     - network
     - wifi
     - bluetooth
-    - audio
     - ntp
     - yubikey
     - ssh
@@ -111,6 +110,33 @@
       become: true
       yay:
         name: "{{ browsers }}"
+
+- name: Setup media tooling
+  hosts: all
+  roles:
+    - audio
+  tasks:
+    - name: Install media applications
+      become: true
+      package:
+        name:
+          - vlc
+          - mpv
+          - totem
+    - name: Install gstreamer
+      become: true
+      package:
+        name:
+          - gstreamer
+          - gstreamer-vaapi
+          - gst-plugins-good
+          - gst-plugins-base
+    - name: Install ffmpeg
+      become: true
+      package:
+        name:
+          - ffmpeg
+          - gst-libav
 
 - name: Setup PHP development 
   hosts: all
