@@ -5,3 +5,10 @@
   package:
     name: wpa_supplicant
     state: present
+
+- name: Install wireless tolls
+  become: true
+  package:
+    name:
+      - wireless_tools
+    state: present

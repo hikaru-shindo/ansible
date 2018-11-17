@@ -6,24 +6,17 @@
     zsh_user: "{{ ansible_user }}"
     zsh_home: "{{ ansible_user_dir }}"
     zsh_theme: "agnoster"
-    browsers:
-      - google-chrome
-      - firefox
-      - firefox-i18n-de
-      - opera
-      - chromium
   roles:
     - yay
     - network
     - wifi
     - bluetooth
-    - power
     - audio
     - ntp
     - yubikey
     - ssh
     - zsh
-    - i3
+    - power
   pre_tasks:
     - name: "Update package cache"
       become: true
@@ -43,7 +36,35 @@
           - curl
           - numlockx
           - gpgme
-          - gnome-terminal
+    - name: Ensure global gitignore file
+      copy:
+        src: gitignore_global
+        dest: "{{ ansible_user_dir }}/.gitignore_global"
+    - name: Optimize makepkg build
+      become: true
+      lineinfile:
+        dest: /etc/makepkg.conf
+        line: "MAKEFLAGS=\"-j{{ ansible_processor_vcpus }}\""
+        regexp: "^MAKEFLAGS="
+    - name: Optimize makepkg compression
+      become: true
+      lineinfile:
+        dest: /etc/makepkg.conf
+        line: "COMPRESSXZ=(xz --threads={{ ansible_processor_vcpus }} -v -c -z -)"
+        regexp: "^COMPRESSXZ="
+
+- name: Install graphical interface
+  hosts: all
+  vars:
+    browsers:
+      - google-chrome
+      - firefox
+      - firefox-i18n-de
+      - opera
+      - chromium
+  roles:
+    - i3
+  tasks:
     - name: Install fonts
       become: true
       yay:
@@ -71,10 +92,6 @@
           - noto-fonts-cjk
           - noto-fonts-emoji
           - powerline-fonts
-    - name: Ensure global gitignore file
-      copy:
-        src: gitignore_global
-        dest: "{{ ansible_user_dir }}/.gitignore_global"
     - name: Install file manager
       become: true
       package:
