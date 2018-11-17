@@ -1,5 +1,11 @@
 ---
 
+- name: enable docker
+  become: true
+  systemd:
+    name: docker
+    enabled: true
+
 - name: restart docker
   become: true
   service:
