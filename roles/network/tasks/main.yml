@@ -25,3 +25,16 @@
       - networkmanager-qt
       - network-manager-applet
     state: present
+
+- name: Install samba
+  become: true
+  package:
+    name: samba
+    state: present
+
+- name: Install samba config
+  become: true
+  copy:
+    src: smb.conf.default
+    dest: /etc/samba/smb.conf
+    force: false
