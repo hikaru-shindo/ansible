@@ -83,6 +83,30 @@
     src: "{{ i3_config_file }}"
     dest: "{{ ansible_user_dir }}/.config/i3/config"
 
+- name: Install Arc themes
+  become: true
+  yay:
+    name:
+      - arc-gtk-theme
+      - arc-solid-gtk-theme
+      - arc-icon-theme
+    state: present
+
+- name: Setup GTK2
+  copy:
+    src: gtk2.config
+    dest: "{{ ansible_user_dir }}/.gtkrc-2.0"
+
+- name: Ensure GTK3 config dir exists
+  file:
+    path: "{{ ansible_user_dir }}/.config/gtk-3.0"
+    state: directory
+
+- name: Setup GTK3
+  copy:
+    src: gtk3.config
+    dest: "{{ ansible_user_dir }}/.config/gtk-3.0/settings.ini"
+
 - name: Install additional packages
   become: true
   yay:
