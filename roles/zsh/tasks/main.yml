@@ -56,6 +56,12 @@
     line: "ZSH_THEME=\"{{ zsh_theme }}\""
     regexp: "^ZSH_THEME"
 
+- name: Ensure oh-my-zsh default user in .zshrc
+  lineinfile:
+    dest: "{{ zsh_home }}/.zshrc"
+    line: "DEFAULT_USER=\"{{ zsh_user }}\""
+    regexp: "^DEFAULT_USER="
+
 - name: Ensure powerline fonts
   become: true
   package:

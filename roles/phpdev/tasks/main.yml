@@ -1,0 +1,40 @@
+---
+
+- name: Install PHP packages
+  become: true
+  package:
+    name: "{{ php_packages }}"
+    state: present
+    
+- name: Install composer
+  become: true
+  package:
+    name: composer
+    state: present
+
+- name: Install basic dev tools
+  become: true
+  package:
+    name:
+      - git
+      - make
+      - ant
+      - gpgme
+    state: present
+
+- name: Install IDEs / editors
+  become: true
+  yay:
+    name:
+      - phpstorm
+      - visual-studio-code-bin
+      - atom
+    state: present
+
+- name: Install extended tools
+  become: true
+  yay:
+    name:
+      - postman-bin
+    state: present
+

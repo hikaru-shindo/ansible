@@ -25,7 +25,15 @@
       - i3blocks
       - i3lock
       - i3status
+    state: present
+
+- name: Install additional tools
+  become: true
+  package:
+    name:
       - dmenu
+      - nitrogen
+    state: present
 
 - name: Ensure dbus
   become: true
@@ -41,10 +49,29 @@
       - i3lock-fancy-multimonitor-git
     state: present
 
-- name: Configure i3 with xinit
-  copy:
-    content: exec dbus-launch i3
+- name: Ensure .xinitrc exists
+  file:
+    path: "{{ ansible_user_dir }}/.xinitrc"
+    state: touch
+  changed_when: false
+
+- name: Start i3wm on starting xorg-server
+  lineinfile:
+    line: exec dbus-launch i3
     dest: "{{ ansible_user_dir }}/.xinitrc"
+    regexp: "^exec dbus-launch i3$"
+
+- name: Ensure profile file exists
+  file:
+    path: "{{ ansible_user_dir }}/{{ i3_profile_file }}"
+    state: touch
+  changed_when: false
+
+- name: Start xort-server on login
+  lineinfile:
+    line: "if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then exec startx; exit; fi"
+    dest: "{{ ansible_user_dir }}/{{ i3_profile_file }}"
+    regexp: exec startx
 
 - name: Ensures i3 config dir exists
   file:
@@ -55,3 +82,9 @@
   copy:
     src: "{{ i3_config_file }}"
     dest: "{{ ansible_user_dir }}/.config/i3/config"
+
+- name: Install additional packages
+  become: true
+  yay:
+    name: "{{ i3_additional_packages }}"
+    state: present
