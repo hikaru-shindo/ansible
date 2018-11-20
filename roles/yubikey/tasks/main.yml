@@ -1,5 +1,11 @@
 ---
 
+- name: Ensure U2F host library installed
+  become: true
+  package:
+    name: libu2f-host
+    state: installed
+
 - name: Enable YubiKey SmartCard support
   become: true
   copy:
