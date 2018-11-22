@@ -44,10 +44,9 @@
       # File manager
       - nautilus
       - sushi
-      - nautilus-sendto
+      - nautlilus-sendto
       - nautilus-image-converter
       - seahorse-nautilus
-      - nautilus-share
       - gvfs-smb
       - gvfs-nfs
       - gvfs-mtp
