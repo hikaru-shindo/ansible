@@ -18,3 +18,7 @@
       service:
         name: lenovo_fix
         state: started
+    - name: Install intel microcode
+      become: true
+      package:
+        name: intel-ucode
