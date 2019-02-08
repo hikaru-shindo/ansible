@@ -7,6 +7,21 @@
       become: true
       package:
         name: xf86-video-intel
+    - name: Ensure nvidia driver
+      become: true
+      package:
+        name: nvidia
+        state: present
+    - name: Ensure nvidia-settings installed
+      become: true
+      package:
+        name: nvidia-settings
+        state: present
+    - name: Ensure bumblebee installed
+      become: true
+      package:
+        name: bumblebee
+        state: present
     - name: Install throttling fix
       become: true
       yay:
@@ -25,3 +40,4 @@
     - name: Update GRUB bootloader
       become: true
       shell: grub-mkconfig -o /boot/grub/grub.cfg
+
