@@ -1,6 +1,21 @@
 ---
 
-- name: Install network manager
+- name: Ensure resolved enabled and started
+  become: true
+  service:
+    name: systemd-resolved
+    enabled: yes
+    state: started
+
+- name: Ensure resolv.conf is using resolved
+  become: true
+  file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+    force: yes
+
+- name: Ensure network manager
   become: true
   package:
     name:
@@ -12,13 +27,19 @@
       - networkmanager-pptp
     state: present
 
-- name: Install gnome-keyring
+- name: Ensure openvpn support for systemd-resolved
+  become: true
+  yay:
+    name: openvpn-update-systemd-resolved
+    state: present
+
+- name: Ensure gnome-keyring
   become: true
   package:
     name: gnome-keyring
     state: present
 
-- name: Install network manager GUIs
+- name: Ensure network manager GUIs
   become: true
   package:
     name: 
@@ -26,13 +47,13 @@
       - network-manager-applet
     state: present
 
-- name: Install samba
+- name: Ensure samba
   become: true
   package:
     name: samba
     state: present
 
-- name: Install samba config
+- name: Ensure samba config
   become: true
   copy:
     src: smb.conf.default
