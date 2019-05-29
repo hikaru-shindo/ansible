@@ -1,5 +1,5 @@
 ---
 
 i3_config_file: i3.config
-i3_profile_file: ".zprofile"
+i3_login_file: ".zlogin"
 i3_additional_packages: []

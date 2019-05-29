@@ -61,16 +61,16 @@
     dest: "{{ ansible_user_dir }}/.xinitrc"
     regexp: "^exec dbus-launch i3$"
 
-- name: Ensure profile file exists
+- name: Ensure login file exists
   file:
-    path: "{{ ansible_user_dir }}/{{ i3_profile_file }}"
+    path: "{{ ansible_user_dir }}/{{ i3_login_file }}"
     state: touch
   changed_when: false
 
 - name: Start xorg-server on login
   lineinfile:
     line: "if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then exec startx; exit; fi"
-    dest: "{{ ansible_user_dir }}/{{ i3_profile_file }}"
+    dest: "{{ ansible_user_dir }}/{{ i3_login_file }}"
     regexp: exec startx
 
 - name: Ensures i3 config dir exists
