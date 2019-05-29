@@ -67,7 +67,7 @@
     state: touch
   changed_when: false
 
-- name: Start xort-server on login
+- name: Start xorg-server on login
   lineinfile:
     line: "if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then exec startx; exit; fi"
     dest: "{{ ansible_user_dir }}/{{ i3_profile_file }}"
