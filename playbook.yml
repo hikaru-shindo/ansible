@@ -85,9 +85,4 @@
       changed_when: false
       pacman:
         update_cache: true
-  tasks:
-    - name: Ensure global gitignore file
-      copy:
-        src: gitignore_global
-        dest: "{{ ansible_user_dir }}/.gitignore_global"
 
