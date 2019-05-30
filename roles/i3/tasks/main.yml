@@ -15,6 +15,7 @@
       - xorg-setxkbmap
       - xorg-xrandr
       - xorg-xbacklight
+      - xorg-xwininfo
     state: present
 
 - name: Install i3wm

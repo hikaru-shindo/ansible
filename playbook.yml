@@ -85,4 +85,15 @@
       changed_when: false
       pacman:
         update_cache: true
-
+  tasks:
+    - name: "Update dotfiles repository"
+      git:
+        repo: git@github.com:hikaru-shindo/dotfiles.git
+        dest: "{{ ansible_user_dir }}/dotfiles"
+        version: "master"
+    - name: "Install dotfiles"
+      shell: "{{ ansible_user_dir }}/dotfiles/install.sh"
+      args:
+        chdir: "{{ ansible_user_dir }}/dotfiles"
+      changed_when: false
+ 
