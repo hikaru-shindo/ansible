@@ -4,7 +4,6 @@
   vars:
     zsh_user: "{{ ansible_user }}"
     zsh_home: "{{ ansible_user_dir }}"
-    zsh_theme: "agnoster"
     i3_additional_packages:
        # Basics
       - htop
