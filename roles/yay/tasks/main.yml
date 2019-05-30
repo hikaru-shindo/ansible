@@ -13,7 +13,7 @@
   become: true
   lineinfile:
     dest: /etc/makepkg.conf
-    line: "COMPRESSXZ=(xz --threads=$(nproc) -v -c -z -)"
+    line: "COMPRESSXZ=(xz --threads=$(nproc) -v -c -z -9 -)"
     regexp: "^COMPRESSXZ="
 
 - name: Check yay installed
