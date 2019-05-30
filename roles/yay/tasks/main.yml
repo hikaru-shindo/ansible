@@ -9,17 +9,11 @@
       - curl
       - git
 
-- name: Optimize makepkg build
-  become: true
-  lineinfile:
-    dest: /etc/makepkg.conf
-    line: "MAKEFLAGS=\"-j{{ ansible_processor_vcpus }}\""
-    regexp: "^MAKEFLAGS="
 - name: Optimize makepkg compression
   become: true
   lineinfile:
     dest: /etc/makepkg.conf
-    line: "COMPRESSXZ=(xz --threads={{ ansible_processor_vcpus }} -v -c -z -)"
+    line: "COMPRESSXZ=(xz --threads=$(nproc) -v -c -z -)"
     regexp: "^COMPRESSXZ="
 
 - name: Check yay installed
