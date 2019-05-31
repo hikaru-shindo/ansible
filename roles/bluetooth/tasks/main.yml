@@ -9,6 +9,13 @@
     state: present
   notify: restart bluetooth
 
+- name: Enable bluetooth service
+  become: true
+  service:
+    name: bluetooth
+    enabled: yes
+    state: started
+
 - name: "Add current user to lp group"
   become: true
   user:
