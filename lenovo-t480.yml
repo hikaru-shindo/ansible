@@ -22,6 +22,11 @@
       package:
         name: bumblebee
         state: present
+    - name: Ensure primus imstalled
+      become: true
+      package:
+        name: primus
+        state: present
     - name: Add current user to bumblebee group
       become: true
       user:
