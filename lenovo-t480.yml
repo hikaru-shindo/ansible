@@ -22,6 +22,18 @@
       package:
         name: bumblebee
         state: present
+    - name: Add current user to bumblebee group
+      become: true
+      user:
+        name: "{{ ansible_user }}"
+        groups: "bumblebee"
+        append: true
+    - name: Enable bumblebeed
+      become: true
+      service:
+        name: bumblebeed
+        enabled: yes
+        state: started
     - name: Install throttling fix
       become: true
       yay:
