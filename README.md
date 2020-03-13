@@ -21,5 +21,5 @@ Activate `wheel` group in `/etc/sudoers` to execute root commands with or withou
 
 Run as your primary user:
 ```sh
-$ ansible-playbook --ask-become-pass playbook.yml
+$ ansible-playbook --ask-become-pass [linux|macos].yml
 ```

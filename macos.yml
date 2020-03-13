@@ -1,0 +1,46 @@
+---
+
+- hosts: all
+  tasks:
+    - name: Install development helplers
+      homebrew:
+        state: present
+        name:
+          - jq
+          - git-secret
+          - blackbox
+          - pwgen
+          - gnupg
+          - plantuml
+          - xz
+    - name: Install misc stuff
+      homebrew:
+        state: present
+        name:
+          - neofetch
+          - imagemagick
+          - htop
+          - x265
+    - name: Install programming languages
+      homebrew:
+        state: present
+        name:
+          - go
+          - python
+    - name: Install kubernetes tooling
+      homebrew:
+        state: present
+        name:
+          - kubernetes-cli
+          - helm
+          - doctl
+    - name: "Update dotfiles repository"
+      git:
+        repo: git@github.com:hikaru-shindo/dotfiles.git
+        dest: "{{ ansible_user_dir }}/dotfiles"
+        version: "master"
+    - name: "Install dotfiles"
+      shell: "{{ ansible_user_dir }}/dotfiles/install.sh"
+      args:
+        chdir: "{{ ansible_user_dir }}/dotfiles"
+      changed_when: false
