@@ -20,6 +20,7 @@
           - neofetch
           - imagemagick
           - htop
+          - wget
           - x265
     - name: Install programming languages
       homebrew:
