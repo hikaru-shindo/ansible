@@ -22,12 +22,23 @@
           - htop
           - wget
           - x265
+          - lame
+          - flac
+          - yubico-piv-tool
+          - ykman
+          - ykpers
     - name: Install programming languages
       homebrew:
         state: present
         name:
           - go
           - python
+          - yarn
+          - elixir
+          - erlang
+          - openjdk
+          - maven
+          - gradle
     - name: Install kubernetes tooling
       homebrew:
         state: present
