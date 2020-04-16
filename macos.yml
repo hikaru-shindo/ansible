@@ -47,6 +47,34 @@
           - kubernetes-cli
           - helm
           - doctl
+    - name: Install brew applications
+      homebrew_cask:
+        state: present
+        accept_external_apps: yes # Ignore if alreay installed manually
+        name: "{{ item }}"
+      with_items:
+        - sizeup
+        - sequel-pro
+        - maccy
+        - iterm2
+        - mobster
+        - telegram-desktop
+        - 1password
+        - brave-browser
+        - google-chrome
+        - firefox
+        - atom
+        - docker
+        - gpg-suite
+        - jetbrains-toolbox
+        - owasp-zap
+        - obs
+        - postman
+        - google-japanese-ime
+        - vlc
+        - libreoffice
+        - the-unarchiver
+        - minikube
     - name: "Update dotfiles repository"
       git:
         repo: git@github.com:hikaru-shindo/dotfiles.git
