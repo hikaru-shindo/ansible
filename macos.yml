@@ -110,6 +110,13 @@
         - libreoffice
         - the-unarchiver
         - minikube
+    - name: Setup maccy
+      shell: defaults write org.p0deje.Maccy {{ item }}
+      with_items:
+        # see https://github.com/p0deje/Maccy/blob/master/README.md
+        - historySize 30
+        - hotKey command+shift+v
+        - pasteByDefault true
     - name: Remove all crap from Dock
       shell: dockutil --remove '{{ item }}'
       ignore_errors: true
