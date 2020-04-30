@@ -12,6 +12,10 @@
       - Maps
       - Photos
       - iBooks
+      - Podcasts
+      - Home
+      - Photos
+      - TV
       - App Store
       - System Preferences
       - Calendar
@@ -28,8 +32,8 @@
       - name: iTerm
         path: /Applications/iTerm.app
         pos: 4
-      - name: iTunes
-        path: /Applications/iTunes.app
+      - name: Music
+        path: /System/Applications/Music.app
         pos: 5
       - name: Telegram Desktop
         path: /Applications/Telegram Desktop.app
@@ -115,7 +119,7 @@
       with_items:
         # see https://github.com/p0deje/Maccy/blob/master/README.md
         - historySize 30
-        - hotKey command+shift+v
+        - hotKey command+shift+c
         - pasteByDefault true
     - name: Remove all crap from Dock
       shell: dockutil --remove '{{ item }}'
