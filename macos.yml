@@ -52,6 +52,7 @@
           - xz
           - siege
           - diff-so-fancy
+          - minikube
     - name: Install misc stuff
       homebrew:
         state: present
@@ -113,7 +114,6 @@
         - vlc
         - libreoffice
         - the-unarchiver
-        - minikube
     - name: Setup maccy
       shell: defaults write org.p0deje.Maccy {{ item }}
       with_items:
