@@ -116,6 +116,9 @@
         - the-unarchiver
         - coconutbattery
         - app-cleaner
+        - minikube
+        - kubectx
+        - kube-ps1
     - name: Setup maccy
       shell: defaults write org.p0deje.Maccy {{ item }}
       with_items:
