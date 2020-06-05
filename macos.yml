@@ -119,6 +119,7 @@
         - minikube
         - kubectx
         - kube-ps1
+        - velero # kubernetes cluster backup
     - name: Setup maccy
       shell: defaults write org.p0deje.Maccy {{ item }}
       with_items:
