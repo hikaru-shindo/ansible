@@ -68,6 +68,10 @@
           - ykman
           - ykpers
           - dockutil
+          - minikube
+          - kubectx
+          - kube-ps1
+          - velero # kubernetes cluster backup
     - name: Install programming languages
       homebrew:
         state: present
@@ -116,10 +120,6 @@
         - the-unarchiver
         - coconutbattery
         - app-cleaner
-        - minikube
-        - kubectx
-        - kube-ps1
-        - velero # kubernetes cluster backup
     - name: Setup maccy
       shell: defaults write org.p0deje.Maccy {{ item }}
       with_items:
