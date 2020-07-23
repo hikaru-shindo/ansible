@@ -44,6 +44,7 @@
         state: present
         name:
           - jq
+          - gnu-sed
           - git-secret
           - blackbox
           - pwgen
