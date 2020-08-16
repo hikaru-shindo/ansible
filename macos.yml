@@ -39,6 +39,10 @@
         path: /Applications/Telegram Desktop.app
         pos: 6
   tasks:
+    - name: Add warrensbox tap repo for tfswitch
+      homebrew_tap:
+        name: warrensbox/tap
+        state: present
     - name: Install development helplers
       homebrew:
         state: present
@@ -72,6 +76,7 @@
           - minikube
           - kubectx
           - kube-ps1
+          - tfswitch # warrensbox/tap
           - velero # kubernetes cluster backup
     - name: Install programming languages
       homebrew:
