@@ -119,6 +119,7 @@
         - jetbrains-toolbox
         - owasp-zap
         - obs
+        - loopback
         - postman
         - google-japanese-ime
         - vlc
