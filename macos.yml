@@ -58,6 +58,7 @@
           - siege
           - diff-so-fancy
           - minikube
+          - karn
     - name: Install misc stuff
       homebrew:
         state: present
