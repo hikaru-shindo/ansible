@@ -126,6 +126,7 @@
           - the-unarchiver
           - coconutbattery
           - app-cleaner
+          - little-snitch
     - name: Setup maccy
       shell: defaults write org.p0deje.Maccy {{ item }}
       with_items:
