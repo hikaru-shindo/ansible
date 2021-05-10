@@ -62,7 +62,6 @@
       homebrew:
         state: present
         name:
-          - neofetch
           - imagemagick
           - htop
           - wget
