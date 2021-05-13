@@ -58,6 +58,7 @@
           - diff-so-fancy
           - minikube
           - karn
+          - gh
     - name: Install misc stuff
       homebrew:
         state: present
