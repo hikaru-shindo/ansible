@@ -59,6 +59,7 @@
           - minikube
           - karn
           - gh
+          - glab
     - name: Install misc stuff
       homebrew:
         state: present
