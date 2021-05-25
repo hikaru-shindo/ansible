@@ -156,7 +156,7 @@
         state: directory
     - name: "Fix gnupg+YubiKey on Big Sur with gnupg >2.3.1"
       copy:
-        path: "{{ ansible_user_dir }}/.gnupg/scdaemon.conf"
+        dest: "{{ ansible_user_dir }}/.gnupg/scdaemon.conf"
         content: |
           disable-ccid
     - name: "Update dotfiles repository"
