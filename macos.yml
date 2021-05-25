@@ -150,6 +150,15 @@
     - name: Fix order
       shell: dockutil --move '{{ item.name }}' --position {{ item.pos }}
       with_items: "{{ dockitems_to_persist }}"
+    - name: "Ensure .gnupg directory exists"
+      file:
+        path: "{{ ansible_user_dir }}/.gnupg"
+        state: directory
+    - name: "Fix gnupg+YubiKey on Big Sur with gnupg >2.3.1"
+      copy:
+        path: "{{ ansible_user_dir }}/.gnupg/scdaemon.conf"
+        content: |
+          disable-ccid
     - name: "Update dotfiles repository"
       git:
         repo: git@github.com:hikaru-shindo/dotfiles.git
