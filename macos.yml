@@ -57,6 +57,9 @@
           - siege
           - diff-so-fancy
           - minikube
+          - pinentry-mac
+          - gpg
+          - gpg2
           - karn
           - gh
           - glab
@@ -116,7 +119,6 @@
           - firefox
           - atom
           - docker
-          - gpg-suite
           - jetbrains-toolbox
           - owasp-zap
           - obs
