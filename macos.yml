@@ -79,6 +79,7 @@
           - kube-ps1
           - tfswitch # warrensbox/tap
           - velero # kubernetes cluster backup
+          - magic-wormhole
     - name: Install programming languages
       homebrew:
         state: present
