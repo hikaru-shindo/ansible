@@ -107,7 +107,7 @@
         state: present
         accept_external_apps: yes # Ignore if alreay installed manually
         name:
-          - sizeup
+          - rectangle
           - sequel-ace
           - maccy
           - iterm2
@@ -136,6 +136,7 @@
           state: absent
           name:
             - sequel-pro
+            - sizeup
     - name: Setup maccy
       shell: defaults write org.p0deje.Maccy {{ item }}
       with_items:
