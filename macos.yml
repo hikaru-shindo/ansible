@@ -127,6 +127,7 @@
           - docker
           - jetbrains-toolbox
           - owasp-zap
+          - burp-suite-professional
           - obs
           - loopback
           - postman
