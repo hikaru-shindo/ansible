@@ -174,7 +174,7 @@
       git:
         repo: git@github.com:hikaru-shindo/dotfiles.git
         dest: "{{ ansible_user_dir }}/dotfiles"
-        version: "master"
+        version: "main"
     - name: "Install dotfiles"
       shell: "{{ ansible_user_dir }}/dotfiles/install.sh"
       args:
