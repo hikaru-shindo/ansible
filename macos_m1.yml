@@ -1,0 +1,145 @@
+---
+- hosts: all
+  tasks:
+    - name: Add US AltGr Internaltional keyboard layout
+      become: true
+      get_url:
+        url: https://raw.githubusercontent.com/xv0x7c0/osx-us-altgr-intl/master/us-altgr-intl.keylayout
+        dest: /Library/Keyboard Layouts/us-altgr-intl.keylayout
+    - name: Install development tools
+      homebrew:
+        state: present
+        name:
+          - jq
+          - gnu-sed
+          - git-secret
+          - pwgen
+          - plantuml
+          - xz
+          - siege
+          - diff-so-fancy
+          - karn
+          - tfenv
+          - vim
+          - gh
+          - glab
+    - name: Install misc stuff
+      homebrew:
+        state: present
+        name:
+          - imagemagick
+          - htop
+          - wget
+          - x265
+          - lame
+          - flac
+          - magic-wormhole
+          - mas # reqiuired to install app store apps with ansible
+    - name: Install programming languages
+      homebrew:
+        state: present
+        name:
+          - go
+          - python
+          - yarn
+          - elixir
+          - erlang
+          - openjdk
+          - maven
+          - gradle
+    - name: Install kubernetes tooling
+      homebrew:
+        state: present
+        name:
+          - kubernetes-cli
+          - helm
+    - name: Install clound provider tooling
+      homebrew:
+        state: present
+        name:
+          - doctl
+          - awscli
+    - name: Install browsers
+      homebrew_cask:
+        state: present
+        accept_external_apps: yes # Ignore if alreay installed manually
+        name:
+        - google-chrome
+        - brave-browser
+        - firefox
+    - name: Install productivity helpers
+      homebrew_cask:
+        state: present
+        accept_external_apps: yes # Ignore if alreay installed manually
+        name:
+          - maccy
+          - rectangle
+          - iterm2
+    - name: Install development casks
+      homebrew_cask:
+        state: present
+        accept_external_apps: yes # Ignore if already installed manually
+        name: 
+          - docker
+          - jetbrains-toolbox
+          - owasp-zap
+          - burp-suite-professional
+          - sublime-text
+          - mobster
+          - postman
+    - name: Install other brew applications
+      homebrew_cask:
+        state: present
+        accept_external_apps: yes # Ignore if alreay installed manually
+        name:
+          - google-japanese-ime
+          - vlc
+          - libreoffice
+          - little-snitch
+    - name: Install Apple Workspace applications
+      community.general.mas:
+        id: 
+          - 409183694 # Keynote
+          - 409201541 # Pages
+          - 409203825 # Numbers
+        state: present
+    - name: Install Microsoft Office
+      community.general.mas:
+        id: 
+          - 462054704 # Microsoft Word
+          - 985367838 # Microsoft Outlook
+          - 462058435 # Microsoft Excel
+          - 462062816 # Microsoft PowerPoint
+          - 784801555 # Microsoft OneNote
+          - 1295203466 # Microsoft Remote Desktop
+          - 1274495053 # Microsoft To Do
+          - 823766827 # One Drive
+        state: present
+    - name: Install applications from AppStore
+      community.general.mas:
+        id: 
+          - 1333542190 # 1Password
+          - 425424353 # The Unarchiver
+          - 1518036000 # Sequel Ace
+          - 824183456 # Affinity Photo
+          - 1116599239 # NordVPN IKE
+          - 497799835 # XCode
+        state: present
+    - name: Setup maccy
+      community.general.osx_defaults:
+        key: org.p0deje.Maccy
+        value:
+          # see https://github.com/p0deje/Maccy/blob/master/README.md
+          - historySize 30
+          - hotKey command+shift+c
+          - pasteByDefault true
+    - name: "Update dotfiles repository"
+      git:
+        repo: git@github.com:hikaru-shindo/dotfiles.git
+        dest: "{{ ansible_user_dir }}/dotfiles"
+        version: "main"
+    - name: "Install dotfiles"
+      shell: "{{ ansible_user_dir }}/dotfiles/install.sh"
+      args:
+        chdir: "{{ ansible_user_dir }}/dotfiles"
+      changed_when: false
