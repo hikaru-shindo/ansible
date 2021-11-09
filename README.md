@@ -23,3 +23,9 @@ Run as your primary user:
 ```sh
 $ ansible-playbook --ask-become-pass [linux|macos_x86|macos_m1].yml
 ```
+
+## iTerm 2
+
+Color schemes for iTerm2 are available here: https://github.com/mbadolato/iTerm2-Color-Schemes
+
+Recommeded scheme: Jetbrains Darcula
