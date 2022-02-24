@@ -23,6 +23,7 @@
           - vim
           - gh
           - glab
+          - jenv
     - name: Install misc stuff
       homebrew:
         state: present
@@ -41,12 +42,14 @@
         name:
           - go
           - python
+          - node
           - yarn
           - elixir
           - erlang
           - openjdk
           - maven
           - gradle
+          - rust
     - name: Install kubernetes tooling
       homebrew:
         state: present
