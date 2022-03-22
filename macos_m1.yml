@@ -14,16 +14,13 @@
           - gnu-sed
           - git-secret
           - pwgen
-          - plantuml
           - xz
-          - siege
           - diff-so-fancy
           - karn
           - tfenv
           - vim
           - gh
           - glab
-          - jenv
     - name: Install misc stuff
       homebrew:
         state: present
@@ -32,7 +29,6 @@
           - htop
           - wget
           - x265
-          - lame
           - flac
           - magic-wormhole
           - mas # reqiuired to install app store apps with ansible
@@ -44,8 +40,6 @@
           - python
           - node
           - yarn
-          - elixir
-          - erlang
           - openjdk
           - maven
           - gradle
@@ -88,7 +82,6 @@
           - owasp-zap
           - burp-suite-professional
           - sublime-text
-          - mobster
           - postman
     - name: Install other brew applications
       homebrew_cask:
@@ -97,7 +90,6 @@
         name:
           - google-japanese-ime
           - vlc
-          - libreoffice
           - little-snitch
     - name: Install Apple Workspace applications
       community.general.mas:
