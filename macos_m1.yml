@@ -119,6 +119,8 @@
           - 824183456 # Affinity Photo
           - 1116599239 # NordVPN IKE
           - 497799835 # XCode
+          - 1507246666 # Presentify
+          - 424389933 # Final Cut Pro
         state: present
     - name: Setup maccy
       community.general.osx_defaults:
