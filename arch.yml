@@ -6,7 +6,7 @@
     zsh_home: "{{ ansible_user_dir }}"
     i3_additional_packages:
        # Basics
-      - htop
+      - btop
       - wget
       - curl
       - numlockx
