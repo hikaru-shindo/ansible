@@ -10,6 +10,8 @@
       - wget
       - curl
       - numlockx
+      # Shell prompt
+      - starship
       # Browsers
       - google-chrome
       - firefox

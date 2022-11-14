@@ -77,7 +77,7 @@
       homebrew_cask:
         state: present
         accept_external_apps: yes # Ignore if already installed manually
-        name: 
+        name:
           - docker
           - jetbrains-toolbox
           - owasp-zap
@@ -89,6 +89,7 @@
         state: present
         accept_external_apps: yes # Ignore if alreay installed manually
         name:
+          - starship # Prompt tool
           - google-japanese-ime
           - vlc
           - little-snitch
