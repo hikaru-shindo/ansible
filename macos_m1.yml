@@ -28,6 +28,7 @@
           - imagemagick
           - btop
           - wget
+          - most
           - x265
           - flac
           - magic-wormhole
