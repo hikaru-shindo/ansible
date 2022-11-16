@@ -21,6 +21,8 @@
           - vim
           - gh
           - glab
+          - shellcheck
+          - sops
     - name: Install misc stuff
       homebrew:
         state: present
