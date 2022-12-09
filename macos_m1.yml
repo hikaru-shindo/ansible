@@ -23,6 +23,7 @@
           - glab
           - shellcheck
           - sops
+          - podman
     - name: Install misc stuff
       homebrew:
         state: present
@@ -81,7 +82,7 @@
         state: present
         accept_external_apps: yes # Ignore if already installed manually
         name:
-          - docker
+          #- docker # replaced by podman
           - jetbrains-toolbox
           - owasp-zap
           - burp-suite-professional
