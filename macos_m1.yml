@@ -77,6 +77,7 @@
           - rectangle
           - iterm2
           - warp
+          - 1password
     - name: Install development casks
       homebrew_cask:
         state: present
@@ -119,7 +120,7 @@
     - name: Install applications from AppStore
       community.general.mas:
         id: 
-          - 1333542190 # 1Password
+         #- 1333542190 # 1Password - replaced by 1Password 8 in brew
           - 425424353 # The Unarchiver
           - 1518036000 # Sequel Ace
           - 824183456 # Affinity Photo
