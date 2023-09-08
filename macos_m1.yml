@@ -35,6 +35,7 @@
           - x265
           - flac
           - magic-wormhole
+          - eza
           - mas # reqiuired to install app store apps with ansible
     - name: Install programming languages
       homebrew:
