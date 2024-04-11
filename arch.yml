@@ -95,7 +95,7 @@
         dest: "{{ ansible_user_dir }}/dotfiles"
         version: "main"
     - name: "Install dotfiles"
-      shell: "{{ ansible_user_dir }}/dotfiles/install.sh"
+      shell: "{{ ansible_user_dir }}/dotfiles/install"
       args:
         chdir: "{{ ansible_user_dir }}/dotfiles"
       changed_when: false
