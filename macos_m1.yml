@@ -12,13 +12,14 @@
         name:
           - jq
           - gnu-sed
+          - ripgrep
           - git-secret
           - pwgen
           - xz
           - diff-so-fancy
           - karn
           - tfenv
-          - vim
+          - nvim
           - gh
           - glab
           - shellcheck
