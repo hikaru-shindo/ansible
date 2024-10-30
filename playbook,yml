@@ -1,0 +1,62 @@
+---
+
+- hosts: all
+  roles:
+    - name: common
+    - name: yay
+      when: ansible_os_family == "Archlinux"
+    - name: flatpak
+      when: ansible_os_family == "Archlinux"
+    - name: ssh
+    - name: sway
+      when: ansible_os_family == "Archlinux"
+      sway_terminal_package: kitty
+      sway_additional_packages:
+        # Ricing
+        - waybar
+        - wofi
+        - mako
+        - archlinux-wallpaper
+        # Useful apps
+        - dolphin
+        # Terminal Fonts
+        - ttf-jetbrains-mono
+        - ttf-jetbrains-mono-nerd
+    - name: logind
+      when: ansible_os_family == "Archlinux"
+      logind_lid_switch_external_power_action: ignore
+    - name: bluetooth
+      when: ansible_os_family == "Archlinux"
+      bluetooth_users: ["{{ ansible_user | default(ansible_env.USER) }}"]
+    - name: network
+    - name: audio
+      audio_users: ["{{ ansible_user | default(ansible_env.USER) }}"]
+    - name: ntp
+    # Software development
+    - name: dev
+      dev_kotlin_enable: true
+      dev_golang_enable: true
+      dev_rust_enable: true
+      dev_node_enable: true
+    - name: containerisation
+    - name: cloud
+    - name: kubernetes
+      kubernetes_kind_enable: true
+  pre_tasks:
+    - name: "Update package cache"
+      become: true
+      changed_when: false
+      pacman:
+        update_cache: true
+#  tasks:
+#    - name: "Update dotfiles repository"
+#      git:
+#        repo: git@github.com:hikaru-shindo/dotfiles.git
+#        dest: "{{ ansible_user_dir }}/.dotfiles"
+#        version: "main"
+#    - name: "Install dotfiles"
+#      shell: "{{ ansible_user_dir }}/.dotfiles/install"
+#      args:
+#        chdir: "{{ ansible_user_dir }}/.dotfiles"
+#      changed_when: false
+ 

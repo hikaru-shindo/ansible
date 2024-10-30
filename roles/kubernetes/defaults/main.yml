@@ -1,0 +1,8 @@
+---
+
+kubernetes_flux_cli_enable: true
+kubernetes_argocd_cli_enable: true
+kubernetes_minikube_enable: true
+kubernetes_kind_enable: false
+kubernetes_helm_enable: true
+kubernetes_aur_builder_username: aurbuilder

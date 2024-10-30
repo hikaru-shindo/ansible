@@ -1,0 +1,27 @@
+---
+
+- name: Ensure sway installed
+  become: true
+  package:
+    state: present
+    name: "{{ sway_package }}"
+
+- name: Ensure default sway dependencies installed
+  become: true
+  package:
+    state: present
+    name: "{{ sway_default_packages }}"
+
+- name: Ensure sway terminal installed
+  become: true
+  package:
+    state: present
+    name: "{{ sway_terminal_package }}"
+
+
+- name: Ensure additional sway packages installed
+  become: true
+  package:
+    state: present
+    name: "{{ sway_additional_packages }}"
+

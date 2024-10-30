@@ -1,0 +1,57 @@
+---
+
+- name: Ensure basic tools installed
+  become: true
+  package:
+    state: present
+    name:
+      - btrfs-progs
+      - unzip
+      - xz
+      - cifs-utils
+      - magic-wormhole
+      - sed
+      - man-db
+      - keychain
+      - pciutils
+      - acpi
+
+- name: Ensure diagnostic tools installed
+  become: true
+  package:
+    state: present
+    name:
+      - btop
+      - neofetch
+      - inetutils
+      - dnsutils
+
+- name: Ensure shells and shell helpers installed
+  become: true
+  package:
+    state: present
+    name:
+      - fish
+      - zsh
+      - starship
+      - ranger
+      - most
+      - eza
+      - less
+      - tmux
+      - which
+
+- name: Ensure Intel microcode installed
+  when: ansible_processor[1] == 'GenuineIntel'
+  become: true
+  package:
+    state: present
+    name: intel-ucode
+
+- name: Ensure AMD microcode installed
+  when: ansible_processor[1] == 'AuthenticAMD'
+  become: true
+  package:
+    state: present
+    name: amd-ucode
+

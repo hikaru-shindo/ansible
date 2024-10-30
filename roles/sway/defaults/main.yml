@@ -1,0 +1,7 @@
+sway_package: sway
+sway_terminal_package: foot
+sway_default_packages:
+  - swaybg
+  - wmenu
+  - xorg-xwayland
+sway_additional_packages: []

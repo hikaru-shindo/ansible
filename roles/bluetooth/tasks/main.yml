@@ -1,31 +1,33 @@
 ---
 
-- name: Install bluez
+- name: Ensure bluez installed
   become: true
   package:
+    state: present
     name:
       - bluez
       - bluez-utils
-    state: present
   notify: restart bluetooth
 
-- name: Enable bluetooth service
+- name:  Ensure bluetooth service enabled and started
   become: true
   service:
     name: bluetooth
-    enabled: yes
     state: started
+    enabled: yes
 
-- name: "Add current user to lp group"
+- name: Add current user to lp group"
   become: true
   user:
-    name: "{{ ansible_user }}"
+    name: "{{ item }}"
     groups: lp
     append: true
+  loop: "{{ bluetooth_users }}"
 
-- name: Install bluetooth control tools
+- name: Ensure bluetooth UIs installed
   become: true
   package:
+    state: present
     name:
       - blueman
-      - blueberry 
+      - blueberry

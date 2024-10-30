@@ -1,25 +1,14 @@
 ---
-# tasks file for ntp
+- name: Load OS-specific vars.
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - '{{ansible_distribution}}.yml'
+        - '{{ansible_os_family}}.yml'
+        - main.yml
+      paths:
+        - 'vars'
 
-- name: Ensure ntp packages
-  become: true
-  package:
-    name: "{{ item }}"
-  with_items:
-    - ntp
-
-- name: Ensure ntpd service is enabled and started
-  become: true
-  service:
-    name: ntpd
-    enabled: yes
-    state: started
-
-- name: Ensure timeservers
-  become: true
-  lineinfile:
-    dest: /etc/ntp.conf
-    line: "pool {{ item.host }} {{ item.options }}"
-    regexp: "{{ item.host }}"
-  with_items: "{{ ntp_timeservers }}"
-  notify: restart ntpd
+- include_tasks: archlinux.yml
+  when: ansible_os_family == 'Archlinux'

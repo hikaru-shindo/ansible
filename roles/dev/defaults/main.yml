@@ -1,0 +1,9 @@
+---
+
+dev_jvm_enable: true
+dev_golang_enable: true
+dev_rust_enable: true
+dev_node_enable: true
+dev_jetbrains_ide_enable: true
+dev_vscode_enable: true
+dev_aur_builder_username: aurbuilder

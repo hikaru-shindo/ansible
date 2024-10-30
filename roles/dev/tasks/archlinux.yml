@@ -1,0 +1,64 @@
+---
+
+- name: Ensure GitHub and GitLab CLI installed
+  become: true
+  package:
+    state: present
+    name:
+      - github-cli
+      - glab
+
+- name: Ensure base development tools installed
+  become: true
+  package:
+    state: present
+    name:
+      - base-devel
+      - git
+      - gnupg
+      - diff-so-fancy
+      - sops
+      - ripgrep
+      - jq
+      - pwgen
+      - shellcheck
+      - lazygit
+
+- name: Ensure base development tools installed (AUR)
+  become: true
+  become_user: "{{ dev_aur_builder_username }}"
+  kewlfft.aur.aur:
+    state: present
+    name:
+      - karn
+
+- name: Ensure neovim installed
+  become: true
+  package:
+    state: present
+    name: neovim
+
+- name: Ensure VSCode installed
+  when: dev_vscode_enable
+  become: true
+  package:
+    state: present
+    name: code
+
+- name: Ensure go-task installed
+  become: true
+  package:
+    state: present
+    name: go-task
+
+- include_tasks: archlinux/jvm.yml
+  when: dev_jvm_enable
+
+- include_tasks: archlinux/golang.yml
+  when: dev_golang_enable
+
+- include_tasks: archlinux/rust.yml
+  when: dev_rust_enable
+
+- include_tasks: archlinux/node.yml
+  when: dev_node_enable

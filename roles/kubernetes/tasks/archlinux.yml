@@ -1,0 +1,47 @@
+---
+
+- name: Ensure basic kubectl utilities installed
+  become: true
+  package:
+    state: present
+    name:
+      - kubectl
+      - kubectx
+      - kubeconform
+      - k9s
+
+- name: Ensure Flux CLI installed
+  when: kubernetes_flux_cli_enable
+  become: true
+  package:
+    state: present
+    name: fluxcd
+
+- name: Ensure ArgoCD CLI installed
+  when: kubernetes_argocd_cli_enable
+  become: true
+  package:
+    state: present
+    name: argocd
+
+- name: Ensure helm installed
+  when: kubernetes_helm_enable
+  become: true
+  package:
+    state: present
+    name: helm
+
+- name: Ensure minikube installed
+  when: kubernetes_minikube_enable
+  become: true
+  package:
+    state: present
+    name: minikube
+
+- name: Ensure kind installed (AUR)
+  when: kubernetes_kind_enable
+  become: true
+  become_user: "{{ kubernetes_aur_builder_username }}"
+  kewlfft.aur.aur:
+    state: present
+    name: kind-bin

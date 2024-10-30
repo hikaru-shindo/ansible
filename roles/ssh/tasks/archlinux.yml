@@ -1,0 +1,17 @@
+---
+
+- name: Ensure SSH installed
+  become: true
+  package:
+    state: present
+    name: openssh
+
+- name: Ensure SSHD enabled and started
+  when: ssh_sshd_enable
+  service:
+    name: sshd
+    enabled: yes
+    state: started
+
+# TODO: harden security config
+

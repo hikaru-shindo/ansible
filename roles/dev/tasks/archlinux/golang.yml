@@ -1,0 +1,20 @@
+---
+
+- name: Ensure golang installed
+  become: true
+  package:
+    state: present
+    name:
+      - go
+      - go-tools
+
+- name: Ensure GoLand installed (AUR)
+  when: dev_jetbrains_ide_enable
+  become: true
+  become_user: "{{ dev_aur_builder_username }}"
+  kewlfft.aur.aur:
+    state: present
+    name:
+      - goland
+      - goland-jre
+

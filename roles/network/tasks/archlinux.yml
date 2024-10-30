@@ -1,0 +1,51 @@
+---
+
+- name: Ensure resolved enabled and started
+  become: true
+  service:
+    name: systemd-resolved
+    enabled: yes
+    state: started
+
+- name: Ensure resolv.conf is using resolved
+  become: true
+  file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+    force: yes
+
+- name: Ensure NetworkManager installed
+  become: true
+  package:
+    state: present
+    name: 
+      - networkmanager
+      - networkmanager-openvpn
+      - networkmanager-vpnc
+      - networkmanager-openconnect
+      - networkmanager-strongswan
+      - networkmanager-pptp
+      - networkmanager-l2tp
+
+- name: Ensure NetworkManager service enabled
+  become: true
+  service:
+    enabled: yes
+    state: started
+    name: NetworkManager
+
+- name: Ensure NetworkManager GUIs installed
+  become: true
+  package:
+    state: present
+    name:
+      - networkmanager-qt5
+      - network-manager-applet
+
+- name: Ensure samba
+  become: true
+  package:
+    name: samba
+    state: present
+

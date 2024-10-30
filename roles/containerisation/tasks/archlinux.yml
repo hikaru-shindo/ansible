@@ -1,0 +1,11 @@
+---
+
+- name: Ensure podman installed
+  become: true
+  package:
+    state: present
+    name:
+      - podman
+      - podman-compose
+      - podman-docker
+

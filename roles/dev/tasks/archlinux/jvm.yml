@@ -1,0 +1,26 @@
+---
+
+- name: Ensure JDK installed
+  become: true
+  package:
+    state: present
+    name: jdk21-openjdk # TODO: make this configurable - current LTS
+
+- name: Ensure Java build tools
+  become: true
+  package:
+    state: present
+    name:
+      - gradle
+      - maven
+
+- name: Ensure IntelliJ IDEA installed (AUR)
+  when: dev_jetbrains_ide_enable
+  become: true
+  become_user: "{{ dev_aur_builder_username }}"
+  kewlfft.aur.aur:
+    state: present
+    name:
+      - intellij-idea-ultimate-edition
+      - intellij-idea-ultimate-edition-jre
+

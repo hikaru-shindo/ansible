@@ -1,0 +1,16 @@
+---
+
+- name: Ensure flatpak installed
+  become: true
+  package:
+    state: present
+    name: flatpak
+
+- name: Ensure flatpack system repos present
+  become: true
+  community.general.flatpak_remote:
+    state: present
+    name: "{{ item.key }}"
+    flatpakrepo_url: "{{ item.value }}"
+  loop: "{{ flatpak_default_repositories | dict2items }}"
+

@@ -1,61 +1,14 @@
 ---
+#- name: Load OS-specific vars.
+#  include_vars: "{{ lookup('first_found', params) }}"
+#  vars:
+#    params:
+#      files:
+#        - '{{ansible_distribution}}.yml'
+#        - '{{ansible_os_family}}.yml'
+#        - main.yml
+#      paths:
+#        - 'vars'
 
-- name: Ensure resolved enabled and started
-  become: true
-  service:
-    name: systemd-resolved
-    enabled: yes
-    state: started
-
-- name: Ensure resolv.conf is using resolved
-  become: true
-  file:
-    src: /run/systemd/resolve/stub-resolv.conf
-    dest: /etc/resolv.conf
-    state: link
-    force: yes
-
-- name: Ensure network manager
-  become: true
-  package:
-    name:
-      - networkmanager
-      - networkmanager-openvpn
-      - networkmanager-vpnc
-      - networkmanager-openconnect
-      - networkmanager-strongswan
-      - networkmanager-pptp
-    state: present
-
-- name: Ensure openvpn support for systemd-resolved
-  become: true
-  yay:
-    name: openvpn-update-systemd-resolved
-    state: present
-
-- name: Ensure gnome-keyring
-  become: true
-  package:
-    name: gnome-keyring
-    state: present
-
-- name: Ensure network manager GUIs
-  become: true
-  package:
-    name: 
-      - networkmanager-qt
-      - network-manager-applet
-    state: present
-
-- name: Ensure samba
-  become: true
-  package:
-    name: samba
-    state: present
-
-- name: Ensure samba config
-  become: true
-  copy:
-    src: smb.conf.default
-    dest: /etc/samba/smb.conf
-    force: false
+- include_tasks: archlinux.yml
+  when: ansible_os_family == 'Archlinux'

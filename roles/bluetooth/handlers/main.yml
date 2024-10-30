@@ -1,7 +1,8 @@
---- 
+---
 
 - name: restart bluetooth
   become: true
   service:
     name: bluetooth
     state: restarted
+

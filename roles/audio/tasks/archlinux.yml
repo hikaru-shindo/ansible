@@ -1,0 +1,26 @@
+---
+
+- name: Ensure pipewire installed
+  become: true
+  package:
+    state: present
+    name:
+      - pipewire
+      - pipewire-pulse
+      - pipewire-audio
+
+- name: Ensure pipewire configuration GUIs installed
+  become: true
+  package:
+    state: present
+    name:
+      - pavucontrol # works becacuse of pipewire-pulse
+      - qpwgraph # if we need to rewire something ;)
+
+- name: Add current user to the audio group"
+  become: true
+  user:
+    name: "{{ item }}"
+    groups: "audio"
+    append: true
+  loop: "{{ audio_users }}"

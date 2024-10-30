@@ -1,0 +1,21 @@
+---
+
+- name: Ensure {{ ntp_timesyncd_config_dir }} present
+  become: true
+  file:
+    path: "{{ ntp_timesyncd_config_dir }}"
+    state: directory
+
+- name: Configure NTP servers
+  become: true
+  template:
+    src: timesyncd.conf.j2
+    dest: "{{ ntp_timesyncd_config_dir }}/timeservers.conf"
+  notify: restart timesyncd
+
+- name: Ensure {{ ntp_timesyncd_service }} service enabled and started
+  become: true
+  service:
+    name: "{{ ntp_timesyncd_service }}"
+    state: started
+    enabled: yes

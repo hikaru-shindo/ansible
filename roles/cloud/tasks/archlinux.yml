@@ -1,0 +1,31 @@
+---
+
+- name: Ensure basic cloud IaC tools
+  become: true
+  package:
+    state: present
+    name:
+      - opentofu
+      - terraform
+
+- name: Ensure AWS CLI installed
+  when: cloud_aws_enabled
+  become: true
+  package: 
+    state: present
+    name: aws-cli
+
+- name: Ensure DigitalOcean CLI installed
+  when: cloud_digital_ocean_enabled
+  become: true
+  package:
+    state: present
+    name: doctl
+
+- name: Ensure Hetzner Cloud CLI installed
+  when: cloud_hetzner_enabled
+  become: true
+  package:
+    state: present
+    name: hcloud
+

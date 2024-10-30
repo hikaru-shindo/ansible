@@ -1,3 +1,0 @@
-[submodule "external/yay"]
-	path = external/yay
-	url = git@github.com:mnussbaum/ansible-yay.git

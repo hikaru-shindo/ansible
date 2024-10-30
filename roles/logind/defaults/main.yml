@@ -1,0 +1,14 @@
+---
+
+# Defaults of systemd-logind
+logind_power_key_action: poweroff
+logind_power_key_longpress_action: ignore
+logind_reboot_key_action: reboot
+logind_reboot_key_longpress_action: poweroff
+logind_suspend_key_action: suspend
+logind_suspend_key_longpress_action: hibernate
+logind_hibernate_key_action: hibernate
+logind_hibernate_key_longpress_action: ignore
+logind_lid_switch_action: suspend
+logind_lid_switch_external_power_action: suspend
+logind_lid_switch_docked_action: ignore

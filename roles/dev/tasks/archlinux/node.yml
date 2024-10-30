@@ -1,0 +1,20 @@
+---
+
+- name: Ensure node installed
+  become: true
+  package:
+    state: present
+    name:
+      - nodejs
+      - yarn
+
+- name: Ensure WebStorm installed (AUR)
+  when: dev_jetbrains_ide_enable
+  become: true
+  become_user: "{{ dev_aur_builder_username }}"
+  kewlfft.aur.aur:
+    state: present
+    name:
+      - webstorm
+      - webstorm-jre
+

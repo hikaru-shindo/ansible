@@ -1,0 +1,5 @@
+---
+
+cloud_aws_enabled: true
+cloud_digital_ocean_enabled: true
+cloud_hetzner_enabled: true

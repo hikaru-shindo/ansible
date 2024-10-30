@@ -1,5 +1,4 @@
 ---
-# tasks file for pacaur
 
 - name: Ensure build dependencies
   become: true
@@ -41,3 +40,22 @@
   when: yay.rc != 0
   notify: Cleanup yay build directory
 
+- name: Ensure aurbuiler user exists
+  when: yay_aur_builder_enable
+  become: true
+  user:
+    state: present
+    name: "{{yay_aur_builder_username }}"
+    system: true
+    shell: /usr/bin/nologin
+    create_home: false
+
+- name: Ensure AUR builder user can execute commands without sudo
+  when: yay_aur_builder_enable
+  become: true
+  lineinfile:
+    path: /etc/sudoers.d/aur_builder-allow-pacman
+    state: present
+    line: "{{ yay_aur_builder_username}} ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+    validate: /usr/sbin/visudo -cf %s
+    create: yes

@@ -1,0 +1,21 @@
+---
+
+- name: Ensure rust installed
+  become: true
+  package:
+    state: present
+    name:
+      - rust
+      - rust-analyzer
+      - cargo-audit
+
+- name: Ensure Rust Rover installed (AUR)
+  when: dev_jetbrains_ide_enable
+  become: true
+  become_user: "{{ dev_aur_builder_username }}"
+  kewlfft.aur.aur:
+    state: present
+    name:
+      - rustrover
+      - rustrover-jre
+

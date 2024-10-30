@@ -1,0 +1,21 @@
+---
+
+- name: Ensure /etc/systemd/logind.conf.d present
+  become: true
+  file:
+    path: /etc/systemd/logind.conf.d
+    state: directory
+
+- name: Configure power management
+  become: true
+  template:
+    src: suspend-states.conf.j2
+    dest: /etc/systemd/logind.conf.d/10-suspend-states.conf
+  notify: reload systemd-logind
+
+- name: Ensure systemd-logind enabled
+  become: true
+  service:
+    name: systemd-logind
+    enabled: yes
+    state: started

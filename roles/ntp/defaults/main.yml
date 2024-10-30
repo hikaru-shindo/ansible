@@ -1,10 +1,14 @@
 ---
-# defaults file for ntp
 
-ntp_timeservers:
-  - host: ptbtime1.ptb.de
-    options: iburst
-  - host: ptbtime2.ptb.de
-    options: iburst
-  - host: ptbtime3.ptb.de
-    options: iburst
+ntp_servers:
+  - ptbtime1.ptb.de
+  - ptbtime2.ptb.de
+  - ptbtime3.ptb.de
+  - ptbtime4.ptb.de
+
+ntp_fallback_servers:
+  - 0.arch.pool.ntp.org
+  - 1.arch.pool.ntp.org
+  - 2.arch.pool.ntp.org
+  - 3.arch.pool.ntp.org
+
